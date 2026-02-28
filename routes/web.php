@@ -5,11 +5,12 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\UserController;
 use App\Services\UserService;
 use Illuminate\Support\Facades\Response;
+use App\Http\Controllers\ProductController;
+use App\Services\ProductService;
 
 
 Route::get('/', function () {
-    return view('welcome');
-    return 'hello world!';
+    return view('welcome', ["name" => "austria-app"]);
 });
 
 Route::get('show-users', [UserController::class, 'show']);
@@ -56,7 +57,7 @@ Route::get('test/route/sample', function(){
 
 //Route -> Middleware Group 
 Route::middleware(['user-middleware'])->group(function(){
-    Route::get('route-middleware-group/first', function(Request $request){
+    Route::get('/route-middleware-group/first', function(Request $request){
         echo 'first';
     });
 
@@ -79,4 +80,17 @@ Route::get('/token', function(Request $request){
 
 Route::post('/token', function (Request $request) {
     return $request->all();
+});
+
+//controller 
+//middleware
+Route::get('/users',[UserController::class, 'index'])->middleware('user-middleware');
+
+//resource
+Route::resource('products', ProductController::class);
+
+//view with data 
+Route::get('/product-list',function(ProductService $productService){
+    $data['products'] = $productService->listProducts();
+    return view('products.list', $data);
 });

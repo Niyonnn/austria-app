@@ -17,4 +17,4 @@ class CleanInputs
     {
         return $next($request);
     }
-}
+}  
