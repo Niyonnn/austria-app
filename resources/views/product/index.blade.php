@@ -1,4 +1,6 @@
-    <table class="table table-striped table-bordered">
+<x-layout>
+<x-slot name="heading">Product List</x-slot>
+<table class="table table-striped table-bordered">
         <thead class="table-dark">
             <tr>
                 <th>Id</th>
@@ -17,15 +19,4 @@
         </tbody>
     </table>
 </div>
-
-<h1>Tasks</h1>
-<ul>
-    @foreach ($tasks as $task)
-        <li>{{ $task }}</li>
-    @endforeach
-</ul>
-
-<p>Global Variables:</p>
-<p>{{ $sharedVariable }}</p>
-
-<p>Product Key: {{ $productKey }}</p>
+</x-layout>

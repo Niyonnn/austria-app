@@ -22,7 +22,9 @@ class UserController extends Controller
     }
 
     public function index(UserService $userService){
-        return $userService->listUsers();
+        // render a view so that layout/components are applied
+        $users = $userService->listUsers();
+        return view('users.index', compact('users'));
     }
 
     public function first(UserService $userService){
